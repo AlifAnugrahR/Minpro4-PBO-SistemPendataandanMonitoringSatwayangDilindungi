@@ -70,6 +70,7 @@ sql/
 ---
 **Gambar MVC**
 
+
 <img width="400" height="362" alt="image" src="https://github.com/user-attachments/assets/083736a6-1600-446c-bd88-f2d145338b05" />
 
 
@@ -108,7 +109,9 @@ Selanjutnya `Menu.jalankan()` menampilkan menu utama berulang dengan `while (tru
 **GAMBAR - Tampilan Menu Utama**
 
 
+
 <img width="446" height="277" alt="image" src="https://github.com/user-attachments/assets/841a0cb6-3800-4038-9786-1f601ae4a2ad" />
+
 
 
 
@@ -177,7 +180,10 @@ INSERT INTO satwa (id, nama, jenis, habitat, berbisa, berat_badan, panjang_tubuh
 **GAMBAR - Tabel satwa di phpMyAdmin Setelah Import satwa.sql, Sebelum Program Dijalankan**
 
 proses membuat database 
+
+
 <img width="788" height="440" alt="image" src="https://github.com/user-attachments/assets/ec7b7ff2-1563-4beb-8838-da570e36b803" />
+
 
 
 
