@@ -38,8 +38,6 @@ Data yang dikelola meliputi ID, nama, jenis (Mamalia/Reptil), serta data khusus 
 | `PreparedStatement` | Menjalankan query database dengan aman (anti SQL Injection) |
 | Pola DAO (Data Access Object) | Memisahkan logika akses database dari logika program |
 
-**Catatan nilai tambah:** Project ini **tidak menggunakan ORM** (seperti Hibernate atau JPA). Pengembangan difokuskan sepenuhnya pada penerapan ketentuan wajib, yaitu JDBC dengan `PreparedStatement` dan pola DAO yang benar dan teruji.
-
 ---
 
 ## 5. Struktur Package
@@ -107,7 +105,7 @@ public SatwaCRUD() {
 
 Selanjutnya `Menu.jalankan()` menampilkan menu utama berulang dengan `while (true)` sampai pengguna memilih Keluar.
 
-**GAMBAR – Tampilan Menu Utama**
+**GAMBAR - Tampilan Menu Utama**
 
 
 <img width="446" height="277" alt="image" src="https://github.com/user-attachments/assets/841a0cb6-3800-4038-9786-1f601ae4a2ad" />
@@ -176,7 +174,7 @@ INSERT INTO satwa (id, nama, jenis, habitat, berbisa, berat_badan, panjang_tubuh
 (2, 'Komodo', 'Reptil', NULL, FALSE, NULL, 250.0);
 ```
 
-**GAMBAR – Tabel satwa di phpMyAdmin Setelah Import satwa.sql, Sebelum Program Dijalankan**
+**GAMBAR - Tabel satwa di phpMyAdmin Setelah Import satwa.sql, Sebelum Program Dijalankan**
 
 proses membuat database 
 <img width="788" height="440" alt="image" src="https://github.com/user-attachments/assets/ec7b7ff2-1563-4beb-8838-da570e36b803" />
@@ -205,7 +203,7 @@ Gambar di atas menunjukkan saat program baru pertama kali dijalankan dan penggun
 
 Seluruh proses CRUD ditangani oleh `SatwaCRUD` (Controller) yang memanggil `SatwaDAOImpl` (DAO), tanpa ada data yang disimpan sementara di memori.
 
-### 8.1 Create – `tambahSatwa()` dan `SatwaDAO.tambah()`
+### 8.1 Create - `tambahSatwa()` dan `SatwaDAO.tambah()`
 
 **Fungsi:** menambahkan data satwa baru langsung ke tabel `satwa` di database.
 
@@ -378,7 +376,7 @@ Method `buatSatwaDariResultSet()` membaca setiap baris `ResultSet` dan mengubahn
 <img width="477" height="537" alt="image" src="https://github.com/user-attachments/assets/d8098ab2-c04e-4f64-a5c7-354996a7f605" />
 
 
-### 8.3 Update – `updateSatwa()` dan `SatwaDAO.updateNama()`
+### 8.3 Update - `updateSatwa()` dan `SatwaDAO.updateNama()`
 
 **Fungsi:** mengubah nama satwa berdasarkan ID, langsung di database.
 
@@ -423,17 +421,17 @@ public void updateNama(int id, String namaBaru) {
 
 ID dicek lebih dulu ke database lewat `idSudahAda()`, bukan dicek ke ArrayList seperti Mini Project 3, karena data sepenuhnya ada di database.
 
-**GAMBAR – Proses Update Data di Program**
+**GAMBAR - Proses Update Data di Program**
 
 <img width="547" height="133" alt="image" src="https://github.com/user-attachments/assets/a0145ad7-e8d9-4b84-ac1b-1424c4263cb0" />
 
 
-**GAMBAR 9 – BUKTI: Tabel satwa di phpMyAdmin Setelah Update, Nama Berubah**
+**GAMBAR - BUKTI: Tabel satwa di phpMyAdmin Setelah Update, Nama Berubah**
 
 <img width="853" height="555" alt="image" src="https://github.com/user-attachments/assets/1ccb2ce5-e229-480e-b086-d5f0963c2c1f" />
 
 
-### 8.4 Delete – `hapusSatwa()` dan `SatwaDAO.hapus()`
+### 8.4 Delete - `hapusSatwa()` dan `SatwaDAO.hapus()`
 
 **Fungsi:** menghapus data satwa dari database berdasarkan ID.
 
@@ -516,7 +514,7 @@ public static int cekId(Scanner input) {
 
 Jika pengguna memasukkan `"abc"`, `Integer.parseInt()` melempar `NumberFormatException`, ditangkap `catch`, program menampilkan pesan error dan meminta input diulang, tanpa menghentikan program.
 
-**GAMBAR 12 - Invalid Input: ID Bukan Angka**
+**GAMBAR - Invalid Input: ID Bukan Angka**
 
 <img width="462" height="112" alt="image" src="https://github.com/user-attachments/assets/33b2678e-f394-44f2-a175-2558a8d72ec7" />
 
@@ -556,7 +554,7 @@ while (satwaDAO.idSudahAda(id)) {
 }
 ```
 
-**GAMBAR 13 - Invalid Input: ID Sudah Dipakai (ID 1 Dicoba Lagi)**
+**GAMBAR - Invalid Input: ID Sudah Dipakai (ID 1 Dicoba Lagi)**
 
 <img width="602" height="77" alt="image" src="https://github.com/user-attachments/assets/c32c42fa-3122-4aae-88d5-71d2f1e8686c" />
 
@@ -601,7 +599,7 @@ public static String cekString(Scanner input, String pesan) {
 
 `trim()` menghapus spasi di awal/akhir, `isEmpty()` memastikan input tidak kosong setelah di-trim.
 
-**GAMBAR – Invalid Input: Nama Dikosongkan**
+**GAMBAR - Invalid Input: Nama Dikosongkan**
 
 <img width="602" height="57" alt="image" src="https://github.com/user-attachments/assets/7e8edd2c-616e-4e08-b1cc-15a95bd775e4" />
 
@@ -617,7 +615,7 @@ while (!jenis.equalsIgnoreCase("Mamalia") && !jenis.equalsIgnoreCase("Reptil")) 
 
 `equalsIgnoreCase()` dipakai supaya "mamalia" atau "MAMALIA" tetap dianggap valid.
 
-**GAMBAR – Invalid Input: Jenis Satwa Salah**
+**GAMBAR - Invalid Input: Jenis Satwa Salah**
 
 <img width="596" height="55" alt="image" src="https://github.com/user-attachments/assets/70a41e67-f64d-41b2-a067-b38c81388bd6" />
 
@@ -721,7 +719,7 @@ public abstract class Satwa {
 <img width="677" height="632" alt="image" src="https://github.com/user-attachments/assets/8572b1e7-20b9-4a32-acfe-865a70720e24" />
 
 
-### Polymorphism — Overriding
+### Polymorphism - Overriding
 
 ```java
 // Mamalia.java
@@ -762,7 +760,7 @@ for (Satwa satwa : daftarSatwa) {
 <img width="633" height="382" alt="image" src="https://github.com/user-attachments/assets/41fac3c9-0add-4b96-b152-8ab0f38ea283" />
 
 
-### Polymorphism — Overloading
+### Polymorphism - Overloading
 
 Method `tampilkanRingkas()` di `Satwa` punya 2 versi, nama sama, parameter beda:
 
@@ -852,11 +850,11 @@ Keuntungan pola ini: jika suatu saat database diganti, cukup ubah `SatwaDAOImpl`
 
 | Perubahan | Keterangan |
 |---|---|
-| Penyimpanan data | Dari `ArrayList` di memori → database MySQL (data tidak hilang saat program ditutup) |
-| Dummy data | Dari ditulis di constructor `SatwaCRUD` → sekarang **wajib** lewat file `sql/satwa.sql` |
+| Penyimpanan data | Dari `ArrayList` di memori  database MySQL (data tidak hilang saat program ditutup) |
+| Dummy data | Dari ditulis di constructor `SatwaCRUD` sekarang **wajib** lewat file `sql/satwa.sql` |
 | `SatwaCRUD` | Tidak lagi membuat `ArrayList`, sekarang membuat `SatwaDAOImpl` dan memanggil method DAO untuk setiap operasi |
 | Package baru | `DAO` (interface + implementasi) dan `Config` (koneksi database + test koneksi) |
-| Model (`Satwa`, `Mamalia`, `Reptil`, `Perawatan`) | **Tidak diubah logikanya** — encapsulation, inheritance, abstraction, polymorphism, dan interface tetap sama persis seperti Mini Project 3 |
+| Model (`Satwa`, `Mamalia`, `Reptil`, `Perawatan`) | **Tidak ada yang diubah logikanya** - encapsulation, inheritance, abstraction, polymorphism, dan interface tetap sama persis seperti Mini Project 3 |
 | `Menu`, `SatwaCek` | **Tidak diubah** |
 | Nilai tambah | **Tidak menggunakan ORM.** Pengembangan difokuskan pada penerapan JDBC + `PreparedStatement` + DAO yang benar dan teruji, sesuai ketentuan wajib tugas |
 
