@@ -5,13 +5,6 @@
 
 </div>
 
-## Identitas Mahasiswa
-
-- **Nama:** [Isi Nama]
-- **NIM:** [Isi NIM]
-- **Kelas:** [Isi Kelas]
-- **Program Studi:** [Isi Program Studi]
-
 ---
 
 ## 1. Latar Belakang
@@ -76,7 +69,18 @@ sql/
 └── satwa.sql                  (pembuatan database, tabel, dan dummy data)
 ```
 
-**[GAMBAR 1 – Struktur Package di NetBeans]**
+---
+**Gambar MVC**
+
+<img width="400" height="362" alt="image" src="https://github.com/user-attachments/assets/083736a6-1600-446c-bd88-f2d145338b05" />
+
+
+Diatas ini adalah bentuk dari Model, View, Controller yang sudah diimplementasikan ke program saya
+
+---
+
+
+**Struktur Package di NetBeans**
 
 ### Fungsi Tiap Package
 
@@ -103,7 +107,12 @@ public SatwaCRUD() {
 
 Selanjutnya `Menu.jalankan()` menampilkan menu utama berulang dengan `while (true)` sampai pengguna memilih Keluar.
 
-**[GAMBAR 2 – Tampilan Menu Utama]**
+**GAMBAR – Tampilan Menu Utama**
+
+
+<img width="446" height="277" alt="image" src="https://github.com/user-attachments/assets/841a0cb6-3800-4038-9786-1f601ae4a2ad" />
+
+
 
 ```java
 switch (pilihan) {
@@ -141,19 +150,19 @@ Setiap pilihan menu memanggil method di `SatwaCRUD`, yang kemudian memanggil met
 
 ---
 
-## 7. Dummy Data (Wajib dari File .sql)
+## 7. Dummy Data dari File .sql
 
 Sesuai ketentuan tugas, data awal **tidak dibuat lewat kode Java**. Constructor `SatwaCRUD` di Mini Project 4 ini **tidak lagi berisi `daftarSatwa.add(...)` seperti Mini Project 3**:
 
 ```java
-// Mini Project 3 (LAMA - sudah tidak dipakai lagi)
+// ini adalah Mini Project 3 yang lama dan sudah tidak dipakai lagi
 public SatwaCRUD() {
     daftarSatwa = new ArrayList<>();
     daftarSatwa.add(new Mamalia(1, "Orangutan", "Mamalia", "Hutan", 75.5));
     daftarSatwa.add(new Reptil(2, "Komodo", "Reptil", false, 250.0));
 }
 
-// Mini Project 4 (BARU - data dari database)
+// ini adaalah Mini Project 4 yang baru dan data dari database)
 public SatwaCRUD() {
     satwaDAO = new SatwaDAOImpl();
 }
@@ -167,17 +176,32 @@ INSERT INTO satwa (id, nama, jenis, habitat, berbisa, berat_badan, panjang_tubuh
 (2, 'Komodo', 'Reptil', NULL, FALSE, NULL, 250.0);
 ```
 
-**[GAMBAR 3 – Tabel satwa di phpMyAdmin Setelah Import satwa.sql, Sebelum Program Dijalankan]**
+**GAMBAR – Tabel satwa di phpMyAdmin Setelah Import satwa.sql, Sebelum Program Dijalankan**
 
-Gambar di atas membuktikan data awal (Orangutan, Komodo) sudah ada di database **sebelum** program Java dijalankan sama sekali.
+proses membuat database 
+<img width="788" height="440" alt="image" src="https://github.com/user-attachments/assets/ec7b7ff2-1563-4beb-8838-da570e36b803" />
 
-**[GAMBAR 4 – Menu Tampilkan Satwa Langsung Menampilkan Data Awal]**
+
+
+Dan ini adalah hasilnya 
+
+<img width="1507" height="765" alt="Screenshot 2026-10-13 213347" src="https://github.com/user-attachments/assets/85b0a872-9c17-45ff-b340-b0472391de03" />
+
+
+Gambar di atas membuktikan data awal (Orangutan, Komodo) sudah ada di database **sebelum** program Java dijalankan sama sekali
+
+
+**GAMBAR - Menu Tampilkan Satwa Langsung Menampilkan Data Awal**
+
+
+<img width="557" height="390" alt="image" src="https://github.com/user-attachments/assets/b53cfd47-f7ce-4119-82a1-96223bf23f5e" />
+
 
 Gambar di atas menunjukkan saat program baru pertama kali dijalankan dan pengguna langsung memilih menu 2 (Tampilkan Satwa), data Orangutan dan Komodo langsung muncul tanpa perlu input apa pun — bukti data benar-benar diambil dari database, bukan dari kode.
 
 ---
 
-## 8. CRUD (Terhubung Langsung ke Database)
+## 8. CRUD Terhubung Langsung ke Database
 
 Seluruh proses CRUD ditangani oleh `SatwaCRUD` (Controller) yang memanggil `SatwaDAOImpl` (DAO), tanpa ada data yang disimpan sementara di memori.
 
@@ -269,9 +293,15 @@ public void tambah(Satwa satwa) {
 }
 ```
 
-**[GAMBAR 5 – Proses Tambah Data di Program]**
+**GAMBAR - Proses Tambah Data di Program**
 
-**[GAMBAR 6 – BUKTI: Tabel satwa di phpMyAdmin Setelah Tambah Data, Menampilkan Baris Baru]**
+<img width="645" height="333" alt="image" src="https://github.com/user-attachments/assets/aea91e7e-5b4a-4a56-85af-7da9f44c16cb" />
+
+
+**GAMBAR - BUKTI: Tabel satwa di phpMyAdmin Setelah Tambah Data, Menampilkan Baris Baru**
+
+<img width="878" height="550" alt="image" src="https://github.com/user-attachments/assets/8a76ce4e-469b-4a92-99b7-576f34568c46" />
+
 
 Gambar 6 adalah bukti nyata bahwa `ps.executeUpdate()` benar-benar mengubah isi database: setelah menambah data lewat program, baris baru langsung muncul di phpMyAdmin tanpa perlu input ulang secara manual di sana.
 
@@ -340,9 +370,13 @@ private Satwa buatSatwaDariResultSet(ResultSet rs) throws SQLException {
 }
 ```
 
-Method `buatSatwaDariResultSet()` membaca setiap baris `ResultSet` dan mengubahnya jadi objek `Mamalia` atau `Reptil` sesuai nilai kolom `jenis` — inilah yang membuat `tampilkanInfo()` di menu ini bisa memanggil versi override yang tepat (polymorphism).
+Method `buatSatwaDariResultSet()` membaca setiap baris `ResultSet` dan mengubahnya jadi objek `Mamalia` atau `Reptil` sesuai nilai kolom `jenis` - inilah yang membuat `tampilkanInfo()` di menu ini bisa memanggil versi override yang tepat (polymorphism).
 
-**[GAMBAR 7 – Hasil Tampilkan Satwa di Program (Setelah Ada Data Tambahan)]**
+**GAMBAR - Hasil Tampilkan Satwa di Program (Setelah Ada Data Tambahan)]**
+
+
+<img width="477" height="537" alt="image" src="https://github.com/user-attachments/assets/d8098ab2-c04e-4f64-a5c7-354996a7f605" />
+
 
 ### 8.3 Update – `updateSatwa()` dan `SatwaDAO.updateNama()`
 
@@ -389,9 +423,15 @@ public void updateNama(int id, String namaBaru) {
 
 ID dicek lebih dulu ke database lewat `idSudahAda()`, bukan dicek ke ArrayList seperti Mini Project 3, karena data sepenuhnya ada di database.
 
-**[GAMBAR 8 – Proses Update Data di Program]**
+**GAMBAR – Proses Update Data di Program**
 
-**[GAMBAR 9 – BUKTI: Tabel satwa di phpMyAdmin Setelah Update, Nama Berubah]**
+<img width="547" height="133" alt="image" src="https://github.com/user-attachments/assets/a0145ad7-e8d9-4b84-ac1b-1424c4263cb0" />
+
+
+**GAMBAR 9 – BUKTI: Tabel satwa di phpMyAdmin Setelah Update, Nama Berubah**
+
+<img width="853" height="555" alt="image" src="https://github.com/user-attachments/assets/1ccb2ce5-e229-480e-b086-d5f0963c2c1f" />
+
 
 ### 8.4 Delete – `hapusSatwa()` dan `SatwaDAO.hapus()`
 
@@ -437,9 +477,15 @@ public boolean hapus(int id) {
 
 `ps.executeUpdate()` mengembalikan jumlah baris yang terpengaruh. Jika `0` (ID tidak ditemukan), method mengembalikan `false`, dan `SatwaCRUD` menampilkan pesan ID tidak ditemukan.
 
-**[GAMBAR 10 – Proses Hapus Data di Program]**
+**GAMBAR - Proses Hapus Data di Program**
 
-**[GAMBAR 11 – BUKTI: Tabel satwa di phpMyAdmin Setelah Hapus, Baris Hilang]**
+<img width="673" height="100" alt="image" src="https://github.com/user-attachments/assets/f3ba4ae0-de88-43ad-9cbc-3e5cd5fdcc82" />
+
+
+**GAMBAR - BUKTI: Tabel satwa di phpMyAdmin Setelah Hapus, Baris Hilang**
+
+<img width="833" height="525" alt="image" src="https://github.com/user-attachments/assets/0585c5c7-dea4-4a92-ba42-a89d9a74fff4" />
+
 
 ---
 
@@ -470,7 +516,10 @@ public static int cekId(Scanner input) {
 
 Jika pengguna memasukkan `"abc"`, `Integer.parseInt()` melempar `NumberFormatException`, ditangkap `catch`, program menampilkan pesan error dan meminta input diulang, tanpa menghentikan program.
 
-**[GAMBAR 12 – Invalid Input: ID Bukan Angka]**
+**GAMBAR 12 - Invalid Input: ID Bukan Angka**
+
+<img width="462" height="112" alt="image" src="https://github.com/user-attachments/assets/33b2678e-f394-44f2-a175-2558a8d72ec7" />
+
 
 ### 9.2 ID Tidak Boleh Sama (dicek ke database)
 
@@ -507,7 +556,10 @@ while (satwaDAO.idSudahAda(id)) {
 }
 ```
 
-**[GAMBAR 13 – Invalid Input: ID Sudah Dipakai (ID 1 Dicoba Lagi)]**
+**GAMBAR 13 - Invalid Input: ID Sudah Dipakai (ID 1 Dicoba Lagi)**
+
+<img width="602" height="77" alt="image" src="https://github.com/user-attachments/assets/c32c42fa-3122-4aae-88d5-71d2f1e8686c" />
+
 
 ### 9.3 Validasi Angka Desimal (berat badan / panjang tubuh)
 
@@ -549,7 +601,10 @@ public static String cekString(Scanner input, String pesan) {
 
 `trim()` menghapus spasi di awal/akhir, `isEmpty()` memastikan input tidak kosong setelah di-trim.
 
-**[GAMBAR 14 – Invalid Input: Nama Dikosongkan]**
+**GAMBAR – Invalid Input: Nama Dikosongkan**
+
+<img width="602" height="57" alt="image" src="https://github.com/user-attachments/assets/7e8edd2c-616e-4e08-b1cc-15a95bd775e4" />
+
 
 ### 9.5 Validasi Jenis Satwa (Mamalia/Reptil)
 
@@ -562,7 +617,10 @@ while (!jenis.equalsIgnoreCase("Mamalia") && !jenis.equalsIgnoreCase("Reptil")) 
 
 `equalsIgnoreCase()` dipakai supaya "mamalia" atau "MAMALIA" tetap dianggap valid.
 
-**[GAMBAR 15 – Invalid Input: Jenis Satwa Salah]**
+**GAMBAR – Invalid Input: Jenis Satwa Salah**
+
+<img width="596" height="55" alt="image" src="https://github.com/user-attachments/assets/70a41e67-f64d-41b2-a067-b38c81388bd6" />
+
 
 ### 9.6 Validasi Pilihan Ya/Tidak (berbisa)
 
@@ -585,7 +643,10 @@ public static boolean cekBoolean(Scanner input) {
 }
 ```
 
-**[GAMBAR 16 – Invalid Input: Jawaban Berbisa Salah]**
+**GAMBAR - Invalid Input: Jawaban Berbisa Salah**
+
+<img width="537" height="53" alt="image" src="https://github.com/user-attachments/assets/78423a7a-e35d-42bd-93a2-7c5460e13ef1" />
+
 
 ---
 
@@ -631,7 +692,9 @@ public class Mamalia extends Satwa implements Perawatan {
 }
 ```
 
-**[GAMBAR 17 – Struktur Package Model]**
+**GAMBAR - Struktur Package Model**
+
+<img width="137" height="91" alt="image" src="https://github.com/user-attachments/assets/e439f8b3-7031-4679-b131-3f2ea63c00b5" />
 
 ---
 
@@ -653,7 +716,10 @@ public abstract class Satwa {
 
 `Satwa` tidak bisa dibuat objeknya langsung — hanya `Mamalia` dan `Reptil` yang bisa. `SatwaDAOImpl.buatSatwaDariResultSet()` memanfaatkan hal ini: method tersebut **wajib** mengembalikan `Mamalia` atau `Reptil` (bukan `Satwa` polos), sesuai nilai kolom `jenis` dari database.
 
-**[GAMBAR 18 – Isi Satwa.java Menunjukkan abstract class dan abstract method]**
+**GAMBAR - Isi Satwa.java Menunjukkan abstract class dan abstract method**
+
+<img width="677" height="632" alt="image" src="https://github.com/user-attachments/assets/8572b1e7-20b9-4a32-acfe-865a70720e24" />
+
 
 ### Polymorphism — Overriding
 
@@ -691,7 +757,10 @@ for (Satwa satwa : daftarSatwa) {
 }
 ```
 
-**[GAMBAR 19 – Hasil Overriding tampilkanInfo() pada Mamalia dan Reptil]**
+**GAMBAR - Hasil Overriding tampilkanInfo() pada Mamalia dan Reptil**
+
+<img width="633" height="382" alt="image" src="https://github.com/user-attachments/assets/41fac3c9-0add-4b96-b152-8ab0f38ea283" />
+
 
 ### Polymorphism — Overloading
 
@@ -748,7 +817,10 @@ public class TestKoneksi {
 }
 ```
 
-**[GAMBAR 20 – Hasil Run TestKoneksi.java, Koneksi Berhasil]**
+**GAMBAR Hasil Run TestKoneksi.java, Koneksi Berhasil**
+
+<img width="717" height="532" alt="Screenshot 2026-10-14 132825" src="https://github.com/user-attachments/assets/fe51e355-c52e-4ba3-ac0c-ff983333bcca" />
+
 
 Semua query memakai `PreparedStatement`, sehingga nilai dari input pengguna **tidak pernah digabung langsung ke teks SQL** (mencegah SQL Injection). Tanda `?` adalah parameter yang diisi lewat `ps.setInt()`, `ps.setString()`, dst — bukan dengan menyambung String secara manual, contohnya pada `tambah()` di bagian 8.1.
 
@@ -770,78 +842,13 @@ public interface SatwaDAO {
 }
 ```
 
-`SatwaCRUD` (Controller) **tidak pernah menulis SQL sendiri** — ia hanya memanggil method dari `SatwaDAO`, seperti `satwaDAO.tambah(satwaBaru)` atau `satwaDAO.hapus(id)`. Semua detail `PreparedStatement`, `ResultSet`, dan penanganan `SQLException` tersembunyi rapi di dalam `SatwaDAOImpl`.
+`SatwaCRUD` (Controller) **tidak pernah menulis SQL sendiri** - ia hanya memanggil method dari `SatwaDAO`, seperti `satwaDAO.tambah(satwaBaru)` atau `satwaDAO.hapus(id)`. Semua detail `PreparedStatement`, `ResultSet`, dan penanganan `SQLException` tersembunyi rapi di dalam `SatwaDAOImpl`.
 
 Keuntungan pola ini: jika suatu saat database diganti, cukup ubah `SatwaDAOImpl`, tanpa perlu menyentuh `SatwaCRUD`, `Menu`, atau `Model` sama sekali.
 
 ---
 
-## 14. Bukti Program Terhubung ke Database (Ringkasan)
-
-Bagian ini merangkum seluruh bukti yang sudah ditunjukkan terpisah di bagian 7 dan 8, supaya mudah dicek sekaligus oleh dosen.
-
-| No | Aksi di Program | Query yang Dijalankan | Bukti di phpMyAdmin |
-|---|---|---|---|
-| 1 | Buka phpMyAdmin setelah import `satwa.sql`, sebelum program dijalankan | — | **[GAMBAR 3]** 2 baris data awal sudah ada |
-| 2 | Jalankan program, pilih menu 2 | `SELECT * FROM satwa` | **[GAMBAR 4]** Data awal langsung tampil tanpa input |
-| 3 | Pilih menu 1, tambah data baru | `INSERT INTO satwa (...) VALUES (...)` | **[GAMBAR 6]** Baris baru muncul di phpMyAdmin |
-| 4 | Pilih menu 3, update nama | `UPDATE satwa SET nama = ? WHERE id = ?` | **[GAMBAR 9]** Nama berubah di phpMyAdmin |
-| 5 | Pilih menu 4, hapus data | `DELETE FROM satwa WHERE id = ?` | **[GAMBAR 11]** Baris hilang di phpMyAdmin |
-
-Dengan urutan ini, dosen bisa melihat secara langsung bahwa setiap aksi di program CLI benar-benar mengubah isi database MySQL, bukan hanya tampilan di layar saja.
-
----
-
-## 15. Cara Membuat dan Mengimpor Database
-
-1. Buka **Laragon**, klik **Start All** supaya MySQL aktif.
-2. Buka **phpMyAdmin** (lewat Laragon atau akses `localhost/phpmyadmin`), login sebagai `root` tanpa password.
-3. Klik tab **SQL**, buka file `sql/satwa.sql` dari repository ini, salin seluruh isinya, tempel di kotak SQL, lalu klik **Go**.
-4. Perintah ini otomatis membuat database `db_minpro4_satwa`, tabel `satwa`, dan mengisi 2 data awal (Orangutan dan Komodo).
-5. Cek di tab **Browse** pada tabel `satwa`, harus muncul 2 baris data — ini yang jadi **[GAMBAR 3]**.
-
-```sql
-CREATE DATABASE IF NOT EXISTS db_minpro4_satwa;
-USE db_minpro4_satwa;
-
-CREATE TABLE IF NOT EXISTS satwa (
-    id INT PRIMARY KEY,
-    nama VARCHAR(100) NOT NULL,
-    jenis VARCHAR(20) NOT NULL,
-    habitat VARCHAR(100) NULL,
-    berbisa BOOLEAN NULL,
-    berat_badan DOUBLE NULL,
-    panjang_tubuh DOUBLE NULL
-);
-
-INSERT INTO satwa (id, nama, jenis, habitat, berbisa, berat_badan, panjang_tubuh) VALUES
-(1, 'Orangutan', 'Mamalia', 'Hutan', NULL, 75.5, NULL),
-(2, 'Komodo', 'Reptil', NULL, FALSE, NULL, 250.0);
-```
-
----
-
-## 16. Cara Menjalankan Program
-
-1. Pastikan Laragon sudah **Start All** dan database sudah diimpor (lihat bagian 15).
-2. Buka project di NetBeans. Pastikan `pom.xml` memiliki dependency berikut:
-
-```xml
-<dependency>
-    <groupId>com.mysql</groupId>
-    <artifactId>mysql-connector-j</artifactId>
-    <version>8.4.0</version>
-</dependency>
-```
-
-3. Klik kanan project → **Clean and Build** (Maven akan mengunduh driver MySQL).
-4. Jalankan `Config/TestKoneksi.java` terlebih dahulu (klik kanan file → Run File) untuk memastikan koneksi ke database berhasil — ini yang jadi **[GAMBAR 20]**.
-5. Jalankan class main `Minpro4PBOSatwaYangDilindungi.java` (F6). Pilih menu 2 (Tampilkan Satwa) terlebih dahulu untuk memastikan data Orangutan dan Komodo langsung muncul dari database.
-6. Coba fitur lain secara berurutan: Tambah (1), cek phpMyAdmin, Update (3), cek phpMyAdmin, Hapus (4), cek phpMyAdmin, Lihat Perawatan (5), lalu Keluar (6). Ambil screenshot di setiap langkah sesuai penanda `[GAMBAR ...]` pada README ini.
-
----
-
-## 17. Pengembangan dari Mini Project 3
+## 14. Pengembangan dari Mini Project 3
 
 | Perubahan | Keterangan |
 |---|---|
@@ -855,7 +862,7 @@ INSERT INTO satwa (id, nama, jenis, habitat, berbisa, berat_badan, panjang_tubuh
 
 ---
 
-## 18. Kesimpulan
+## 15. Kesimpulan
 
 Mini Project 4 ini berhasil menghubungkan program Sistem Pendataan dan Monitoring Satwa yang Dilindungi ke database MySQL menggunakan JDBC, `PreparedStatement`, dan pola DAO, tanpa mengubah penerapan konsep OOP (encapsulation, inheritance, polymorphism, abstraction) yang sudah dibangun sejak Mini Project 3. Data kini tersimpan secara permanen di database, diisi awal lewat file `satwa.sql`, dan seluruh operasi CRUD (tambah, tampil, update, hapus) terbukti benar-benar membaca serta menulis ke database — dibuktikan lewat perbandingan langsung tampilan phpMyAdmin sebelum dan sesudah setiap aksi di program.
 
